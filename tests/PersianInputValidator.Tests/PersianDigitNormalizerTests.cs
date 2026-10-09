@@ -270,6 +270,66 @@ namespace PersianInputValidator.Tests
             Assert.IsFalse(IranianMobileValidator.IsValid(null));
             Assert.IsFalse(IranianMobileValidator.IsValid(""));
         }
+        
+        [TestMethod]
+        public void IranianNationalCodeValidator_AcceptsValidCode()
+        {
+            Assert.IsTrue(
+                IranianNationalCodeValidator.IsValid("0084575942"));
+        }
+
+        [TestMethod]
+        public void IranianNationalCodeValidator_AcceptsPersianDigits()
+        {
+            Assert.IsTrue(
+                IranianNationalCodeValidator.IsValid("۰۰۸۴۵۷۵۹۴۲"));
+        }
+
+        [TestMethod]
+        public void IranianNationalCodeValidator_AcceptsArabicIndicDigits()
+        {
+            Assert.IsTrue(
+                IranianNationalCodeValidator.IsValid("٠٠٨٤٥٧٥٩٤٢"));
+        }
+
+        [TestMethod]
+        public void IranianNationalCodeValidator_RejectsInvalidChecksum()
+        {
+            Assert.IsFalse(
+                IranianNationalCodeValidator.IsValid("0084575943"));
+        }
+
+        [TestMethod]
+        public void IranianNationalCodeValidator_RejectsRepeatedDigits()
+        {
+            Assert.IsFalse(
+                IranianNationalCodeValidator.IsValid("1111111111"));
+        }
+
+        [TestMethod]
+        public void IranianNationalCodeValidator_RejectsWrongLength()
+        {
+            Assert.IsFalse(
+                IranianNationalCodeValidator.IsValid("123456789"));
+        }
+
+        [TestMethod]
+        public void IranianNationalCodeValidator_RejectsLetters()
+        {
+            Assert.IsFalse(
+                IranianNationalCodeValidator.IsValid("00845759A2"));
+        }
+
+        [TestMethod]
+        public void IranianNationalCodeValidator_RejectsNullAndEmpty()
+        {
+            Assert.IsFalse(
+                IranianNationalCodeValidator.IsValid(null));
+
+            Assert.IsFalse(
+                IranianNationalCodeValidator.IsValid(""));
+        }
+
 
 
 
