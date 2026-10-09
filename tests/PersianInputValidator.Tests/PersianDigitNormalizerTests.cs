@@ -886,5 +886,49 @@ public void IranianLandlineValidator_NullInput_ReturnsFalse()
 }
 
 
+        
+[TestMethod]
+public void NormalizeWhitespace_OnlyWhitespace_ReturnsEmptyString()
+{
+    Assert.AreEqual(string.Empty, PersianTextNormalizer.NormalizeWhitespace("   \t\n  "));
+}
+
+[TestMethod]
+public void NormalizeWhitespace_MultipleSpaces_CollapsesToSingleSpace()
+{
+    Assert.AreEqual("سلام دنیا", PersianTextNormalizer.NormalizeWhitespace("سلام     دنیا"));
+}
+
+[TestMethod]
+public void NormalizeWhitespace_LeadingAndTrailingWhitespace_IsTrimmed()
+{
+    Assert.AreEqual("سلام دنیا", PersianTextNormalizer.NormalizeWhitespace("   سلام دنیا   "));
+}
+
+[TestMethod]
+public void NormalizeWhitespace_MixedWhitespace_CollapsesToSingleSpace()
+{
+    Assert.AreEqual("سلام دنیا", PersianTextNormalizer.NormalizeWhitespace("سلام\t\n  دنیا"));
+}
+
+[TestMethod]
+public void NormalizeWhitespace_Null_ReturnsNull()
+{
+    Assert.IsNull(PersianTextNormalizer.NormalizeWhitespace(null));
+}
+
+[TestMethod]
+public void NormalizeWhitespace_EmptyString_ReturnsEmptyString()
+{
+    Assert.AreEqual(string.Empty, PersianTextNormalizer.NormalizeWhitespace(string.Empty));
+}
+
+[TestMethod]
+public void NormalizeWhitespace_PreservesPersianDigits()
+{
+    Assert.AreEqual("شماره ۱۲۳۴۵", PersianTextNormalizer.NormalizeWhitespace(" شماره   ۱۲۳۴۵ "));
+}
+
+
     }
 }
