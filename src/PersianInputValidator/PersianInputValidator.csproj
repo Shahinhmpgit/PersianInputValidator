@@ -1,4 +1,4 @@
-
+```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,6 +6,26 @@
     <Nullable>disable</Nullable>
     <LangVersion>latest</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Description>A lightweight library for Persian and English digit normalization and input validation.</Description>
+
+    <PackageId>PersianInputValidator</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Shahinhmpgit</Authors>
+    <Description>A lightweight .NET library for Persian and Arabic-Indic digit normalization, Iranian input validation, and Persian text processing.</Description>
+    <PackageTags>persian;farsi;dotnet;csharp;validation;normalization;unicode;iran</PackageTags>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/Shahinhmpgit/PersianInputValidator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Shahinhmpgit/PersianInputValidator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright 2026 Shahinhmpgit</Copyright>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md"
+          Pack="true"
+          PackagePath="\" />
+  </ItemGroup>
 </Project>
+```
