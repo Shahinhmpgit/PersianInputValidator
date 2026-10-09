@@ -109,5 +109,76 @@ namespace PersianInputValidator.Tests
         {
             Assert.IsFalse(PersianDigitValidator.IsDigitsOnly("-123"));
         }
+        
+        [TestMethod]
+        public void IsLengthValid_AcceptsLengthWithinRange()
+        {
+            Assert.IsTrue(
+                PersianInputLengthValidator.IsLengthValid("12345", 2, 6));
+        }
+
+        [TestMethod]
+        public void IsLengthValid_AcceptsMinimumBoundary()
+        {
+            Assert.IsTrue(
+                PersianInputLengthValidator.IsLengthValid("12", 2, 6));
+        }
+
+        [TestMethod]
+        public void IsLengthValid_AcceptsMaximumBoundary()
+        {
+            Assert.IsTrue(
+                PersianInputLengthValidator.IsLengthValid("123456", 2, 6));
+        }
+
+        [TestMethod]
+        public void IsLengthValid_RejectsTooShortInput()
+        {
+            Assert.IsFalse(
+                PersianInputLengthValidator.IsLengthValid("1", 2, 6));
+        }
+
+        [TestMethod]
+        public void IsLengthValid_RejectsTooLongInput()
+        {
+            Assert.IsFalse(
+                PersianInputLengthValidator.IsLengthValid("1234567", 2, 6));
+        }
+
+        [TestMethod]
+        public void IsLengthValid_RejectsNull()
+        {
+            Assert.IsFalse(
+                PersianInputLengthValidator.IsLengthValid(null, 0, 6));
+        }
+
+        [TestMethod]
+        public void IsLengthValid_AllowsEmptyWhenMinimumIsZero()
+        {
+            Assert.IsTrue(
+                PersianInputLengthValidator.IsLengthValid("", 0, 6));
+        }
+
+        [TestMethod]
+        public void IsLengthValid_RejectsNegativeMinimum()
+        {
+            Assert.IsFalse(
+                PersianInputLengthValidator.IsLengthValid("123", -1, 6));
+        }
+
+        [TestMethod]
+        public void IsLengthValid_RejectsNegativeMaximum()
+        {
+            Assert.IsFalse(
+                PersianInputLengthValidator.IsLengthValid("123", 0, -1));
+        }
+
+        [TestMethod]
+        public void IsLengthValid_RejectsMinimumGreaterThanMaximum()
+        {
+            Assert.IsFalse(
+                PersianInputLengthValidator.IsLengthValid("123", 5, 2));
+        }
+
     }
 }
