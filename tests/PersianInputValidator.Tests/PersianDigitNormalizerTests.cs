@@ -514,10 +514,66 @@ namespace PersianInputValidator.Tests
             Assert.IsFalse(
                 IranianPostalCodeValidator.IsValid(""));
         }
+        
+        [TestMethod]
+        public void DigitScriptDetector_DetectsEnglishDigits()
+        {
+            Assert.AreEqual(
+                DigitScript.English,
+                DigitScriptDetector.Detect("12345"));
+        }
 
+        [TestMethod]
+        public void DigitScriptDetector_DetectsPersianDigits()
+        {
+            Assert.AreEqual(
+                DigitScript.Persian,
+                DigitScriptDetector.Detect("۱۲۳۴۵"));
+        }
 
+        [TestMethod]
+        public void DigitScriptDetector_DetectsArabicIndicDigits()
+        {
+            Assert.AreEqual(
+                DigitScript.ArabicIndic,
+                DigitScriptDetector.Detect("١٢٣٤٥"));
+        }
 
+        [TestMethod]
+        public void DigitScriptDetector_DetectsMixedDigits()
+        {
+            Assert.AreEqual(
+                DigitScript.Mixed,
+                DigitScriptDetector.Detect("12۳"));
+        }
 
+        [TestMethod]
+        public void DigitScriptDetector_IgnoresNonDigitCharacters()
+        {
+            Assert.AreEqual(
+                DigitScript.Persian,
+                DigitScriptDetector.Detect("کد۱۲۳"));
+        }
+
+        [TestMethod]
+        public void DigitScriptDetector_ReturnsNoneForTextWithoutDigits()
+        {
+            Assert.AreEqual(
+                DigitScript.None,
+                DigitScriptDetector.Detect("سلام"));
+        }
+
+        [TestMethod]
+        public void DigitScriptDetector_ReturnsNoneForNullAndEmpty()
+        {
+            Assert.AreEqual(
+                DigitScript.None,
+                DigitScriptDetector.Detect(null));
+
+            Assert.AreEqual(
+                DigitScript.None,
+                DigitScriptDetector.Detect(""));
+        }
 
 
 
