@@ -629,8 +629,48 @@ namespace PersianInputValidator.Tests
                 "",
                 PersianTextNormalizer.NormalizeWhitespace("   \t\n "));
         }
+        
+[TestMethod]
+public void Normalize_ArabicYeh_ConvertsToPersianYeh()
+{
+    Assert.AreEqual("علی", PersianCharacterNormalizer.Normalize("علي"));
+}
 
+[TestMethod]
+public void Normalize_ArabicKaf_ConvertsToPersianKaf()
+{
+    Assert.AreEqual("کتاب", PersianCharacterNormalizer.Normalize("كتاب"));
+}
 
+[TestMethod]
+public void Normalize_AlreadyPersianText_LeavesItUnchanged()
+{
+    Assert.AreEqual("علی کتاب", PersianCharacterNormalizer.Normalize("علی کتاب"));
+}
+
+[TestMethod]
+public void Normalize_EnglishDigitsAndPunctuation_LeavesThemUnchanged()
+{
+    Assert.AreEqual("Test 123!", PersianCharacterNormalizer.Normalize("Test 123!"));
+}
+
+[TestMethod]
+public void Normalize_Null_ReturnsNull()
+{
+    Assert.IsNull(PersianCharacterNormalizer.Normalize(null));
+}
+
+[TestMethod]
+public void Normalize_EmptyString_ReturnsEmptyString()
+{
+    Assert.AreEqual(string.Empty, PersianCharacterNormalizer.Normalize(string.Empty));
+}
+
+[TestMethod]
+public void Normalize_MixedText_NormalizesArabicLettersOnly()
+{
+    Assert.AreEqual("علی کتاب ۱۲۳", PersianCharacterNormalizer.Normalize("علي كتاب ۱۲۳"));
+}
 
 
     }
