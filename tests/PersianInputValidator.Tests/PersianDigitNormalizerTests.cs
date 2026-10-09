@@ -574,6 +574,62 @@ namespace PersianInputValidator.Tests
                 DigitScript.None,
                 DigitScriptDetector.Detect(""));
         }
+        
+        [TestMethod]
+        public void PersianTextNormalizer_TrimsLeadingAndTrailingWhitespace()
+        {
+            Assert.AreEqual(
+                "علی",
+                PersianTextNormalizer.NormalizeWhitespace("  علی  "));
+        }
+
+        [TestMethod]
+        public void PersianTextNormalizer_CollapsesRepeatedSpaces()
+        {
+            Assert.AreEqual(
+                "علی رضایی",
+                PersianTextNormalizer.NormalizeWhitespace("علی   رضایی"));
+        }
+
+        [TestMethod]
+        public void PersianTextNormalizer_NormalizesTabsAndNewlines()
+        {
+            Assert.AreEqual(
+                "علی رضایی",
+                PersianTextNormalizer.NormalizeWhitespace("علی\t\nرضایی"));
+        }
+
+        [TestMethod]
+        public void PersianTextNormalizer_PreservesSingleSpaces()
+        {
+            Assert.AreEqual(
+                "علی رضایی",
+                PersianTextNormalizer.NormalizeWhitespace("علی رضایی"));
+        }
+
+        [TestMethod]
+        public void PersianTextNormalizer_HandlesEmptyInput()
+        {
+            Assert.AreEqual(
+                "",
+                PersianTextNormalizer.NormalizeWhitespace(""));
+        }
+
+        [TestMethod]
+        public void PersianTextNormalizer_ReturnsNullForNullInput()
+        {
+            Assert.IsNull(
+                PersianTextNormalizer.NormalizeWhitespace(null));
+        }
+
+        [TestMethod]
+        public void PersianTextNormalizer_WhitespaceOnlyBecomesEmpty()
+        {
+            Assert.AreEqual(
+                "",
+                PersianTextNormalizer.NormalizeWhitespace("   \t\n "));
+        }
+
 
 
 
