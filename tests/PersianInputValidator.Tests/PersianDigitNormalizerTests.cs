@@ -385,6 +385,77 @@ namespace PersianInputValidator.Tests
             Assert.IsFalse(EmailValidator.IsValid(null));
             Assert.IsFalse(EmailValidator.IsValid(""));
         }
+        
+        [TestMethod]
+        public void PersianTextValidator_AcceptsPersianLetters()
+        {
+            Assert.IsTrue(
+                PersianTextValidator.ContainsOnlyLetters("شاهین"));
+        }
+
+        [TestMethod]
+        public void PersianTextValidator_AcceptsEnglishLetters()
+        {
+            Assert.IsTrue(
+                PersianTextValidator.ContainsOnlyLetters("Shahin"));
+        }
+
+        [TestMethod]
+        public void PersianTextValidator_AllowsSpacesByDefault()
+        {
+            Assert.IsTrue(
+                PersianTextValidator.ContainsOnlyLetters("علی رضایی"));
+        }
+
+        [TestMethod]
+        public void PersianTextValidator_RejectsDigits()
+        {
+            Assert.IsFalse(
+                PersianTextValidator.ContainsOnlyLetters("علی123"));
+        }
+
+        [TestMethod]
+        public void PersianTextValidator_RejectsPunctuationByDefault()
+        {
+            Assert.IsFalse(
+                PersianTextValidator.ContainsOnlyLetters("علی!"));
+        }
+
+        [TestMethod]
+        public void PersianTextValidator_AllowsHyphenWhenConfigured()
+        {
+            Assert.IsTrue(
+                PersianTextValidator.ContainsOnlyLetters(
+                    "Anne-Marie",
+                    allowHyphen: true));
+        }
+
+        [TestMethod]
+        public void PersianTextValidator_RejectsHyphenByDefault()
+        {
+            Assert.IsFalse(
+                PersianTextValidator.ContainsOnlyLetters("Anne-Marie"));
+        }
+
+        [TestMethod]
+        public void PersianTextValidator_CanDisallowWhitespace()
+        {
+            Assert.IsFalse(
+                PersianTextValidator.ContainsOnlyLetters(
+                    "علی رضایی",
+                    allowWhitespace: false));
+        }
+
+        [TestMethod]
+        public void PersianTextValidator_RejectsNullAndEmpty()
+        {
+            Assert.IsFalse(
+                PersianTextValidator.ContainsOnlyLetters(null));
+
+            Assert.IsFalse(
+                PersianTextValidator.ContainsOnlyLetters(""));
+        }
+
 
 
 
