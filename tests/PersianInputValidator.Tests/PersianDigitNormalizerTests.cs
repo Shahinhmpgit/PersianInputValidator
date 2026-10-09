@@ -214,6 +214,63 @@ namespace PersianInputValidator.Tests
             Assert.IsTrue(
                 PersianInputValidatorRules.IsRequired("  سلام  "));
         }
+        
+        [TestMethod]
+        public void IranianMobileValidator_AcceptsEnglishDigits()
+        {
+            Assert.IsTrue(
+                IranianMobileValidator.IsValid("09123456789"));
+        }
+
+        [TestMethod]
+        public void IranianMobileValidator_AcceptsPersianDigits()
+        {
+            Assert.IsTrue(
+                IranianMobileValidator.IsValid("۰۹۱۲۳۴۵۶۷۸۹"));
+        }
+
+        [TestMethod]
+        public void IranianMobileValidator_AcceptsArabicIndicDigits()
+        {
+            Assert.IsTrue(
+                IranianMobileValidator.IsValid("٠٩١٢٣٤٥٦٧٨٩"));
+        }
+
+        [TestMethod]
+        public void IranianMobileValidator_RejectsShortNumber()
+        {
+            Assert.IsFalse(
+                IranianMobileValidator.IsValid("0912345678"));
+        }
+
+        [TestMethod]
+        public void IranianMobileValidator_RejectsWrongPrefix()
+        {
+            Assert.IsFalse(
+                IranianMobileValidator.IsValid("08123456789"));
+        }
+
+        [TestMethod]
+        public void IranianMobileValidator_RejectsLetters()
+        {
+            Assert.IsFalse(
+                IranianMobileValidator.IsValid("09123ABC789"));
+        }
+
+        [TestMethod]
+        public void IranianMobileValidator_RejectsWhitespace()
+        {
+            Assert.IsFalse(
+                IranianMobileValidator.IsValid("09123 56789"));
+        }
+
+        [TestMethod]
+        public void IranianMobileValidator_RejectsNullAndEmpty()
+        {
+            Assert.IsFalse(IranianMobileValidator.IsValid(null));
+            Assert.IsFalse(IranianMobileValidator.IsValid(""));
+        }
+
 
 
     }
