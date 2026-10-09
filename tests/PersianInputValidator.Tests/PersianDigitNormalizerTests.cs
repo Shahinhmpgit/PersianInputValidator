@@ -455,6 +455,66 @@ namespace PersianInputValidator.Tests
             Assert.IsFalse(
                 PersianTextValidator.ContainsOnlyLetters(""));
         }
+        
+        [TestMethod]
+        public void IranianPostalCodeValidator_AcceptsEnglishDigits()
+        {
+            Assert.IsTrue(
+                IranianPostalCodeValidator.IsValid("1234567890"));
+        }
+
+        [TestMethod]
+        public void IranianPostalCodeValidator_AcceptsPersianDigits()
+        {
+            Assert.IsTrue(
+                IranianPostalCodeValidator.IsValid("۱۲۳۴۵۶۷۸۹۰"));
+        }
+
+        [TestMethod]
+        public void IranianPostalCodeValidator_AcceptsArabicIndicDigits()
+        {
+            Assert.IsTrue(
+                IranianPostalCodeValidator.IsValid("١٢٣٤٥٦٧٨٩٠"));
+        }
+
+        [TestMethod]
+        public void IranianPostalCodeValidator_RejectsShortInput()
+        {
+            Assert.IsFalse(
+                IranianPostalCodeValidator.IsValid("123456789"));
+        }
+
+        [TestMethod]
+        public void IranianPostalCodeValidator_RejectsLongInput()
+        {
+            Assert.IsFalse(
+                IranianPostalCodeValidator.IsValid("12345678901"));
+        }
+
+        [TestMethod]
+        public void IranianPostalCodeValidator_RejectsLetters()
+        {
+            Assert.IsFalse(
+                IranianPostalCodeValidator.IsValid("12345ABCDE"));
+        }
+
+        [TestMethod]
+        public void IranianPostalCodeValidator_RejectsWhitespace()
+        {
+            Assert.IsFalse(
+                IranianPostalCodeValidator.IsValid("12345 7890"));
+        }
+
+        [TestMethod]
+        public void IranianPostalCodeValidator_RejectsNullAndEmpty()
+        {
+            Assert.IsFalse(
+                IranianPostalCodeValidator.IsValid(null));
+
+            Assert.IsFalse(
+                IranianPostalCodeValidator.IsValid(""));
+        }
+
 
 
 
