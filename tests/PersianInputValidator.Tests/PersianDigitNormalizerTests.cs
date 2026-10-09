@@ -179,6 +179,42 @@ namespace PersianInputValidator.Tests
             Assert.IsFalse(
                 PersianInputLengthValidator.IsLengthValid("123", 5, 2));
         }
+        
+        [TestMethod]
+        public void IsRequired_AcceptsNonEmptyText()
+        {
+            Assert.IsTrue(
+                PersianInputValidatorRules.IsRequired("سلام"));
+        }
+
+        [TestMethod]
+        public void IsRequired_RejectsNull()
+        {
+            Assert.IsFalse(
+                PersianInputValidatorRules.IsRequired(null));
+        }
+
+        [TestMethod]
+        public void IsRequired_RejectsEmptyString()
+        {
+            Assert.IsFalse(
+                PersianInputValidatorRules.IsRequired(""));
+        }
+
+        [TestMethod]
+        public void IsRequired_RejectsWhitespaceOnly()
+        {
+            Assert.IsFalse(
+                PersianInputValidatorRules.IsRequired("   "));
+        }
+
+        [TestMethod]
+        public void IsRequired_AcceptsTextSurroundedByWhitespace()
+        {
+            Assert.IsTrue(
+                PersianInputValidatorRules.IsRequired("  سلام  "));
+        }
+
 
     }
 }
