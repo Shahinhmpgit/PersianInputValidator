@@ -70,7 +70,7 @@ namespace PersianInputValidator
                     continue;
                 }
 
-                if (character == '.' || character == ',')
+                if (character == '.' || character == ',' || character == '\u066B')
                 {
                     if (separatorFound)
                         return false;
