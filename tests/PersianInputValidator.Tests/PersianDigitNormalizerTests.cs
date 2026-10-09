@@ -329,6 +329,63 @@ namespace PersianInputValidator.Tests
             Assert.IsFalse(
                 IranianNationalCodeValidator.IsValid(""));
         }
+        
+        [TestMethod]
+        public void EmailValidator_AcceptsStandardEmail()
+        {
+            Assert.IsTrue(
+                EmailValidator.IsValid("user@example.com"));
+        }
+
+        [TestMethod]
+        public void EmailValidator_AcceptsSubdomainEmail()
+        {
+            Assert.IsTrue(
+                EmailValidator.IsValid("user@mail.example.com"));
+        }
+
+        [TestMethod]
+        public void EmailValidator_RejectsMissingAtSign()
+        {
+            Assert.IsFalse(
+                EmailValidator.IsValid("userexample.com"));
+        }
+
+        [TestMethod]
+        public void EmailValidator_RejectsMissingDomain()
+        {
+            Assert.IsFalse(
+                EmailValidator.IsValid("user@"));
+        }
+
+        [TestMethod]
+        public void EmailValidator_RejectsMissingLocalPart()
+        {
+            Assert.IsFalse(
+                EmailValidator.IsValid("@example.com"));
+        }
+
+        [TestMethod]
+        public void EmailValidator_RejectsWhitespace()
+        {
+            Assert.IsFalse(
+                EmailValidator.IsValid("user name@example.com"));
+        }
+
+        [TestMethod]
+        public void EmailValidator_RejectsSurroundingWhitespace()
+        {
+            Assert.IsFalse(
+                EmailValidator.IsValid(" user@example.com "));
+        }
+
+        [TestMethod]
+        public void EmailValidator_RejectsNullAndEmpty()
+        {
+            Assert.IsFalse(EmailValidator.IsValid(null));
+            Assert.IsFalse(EmailValidator.IsValid(""));
+        }
+
 
 
 
