@@ -825,6 +825,66 @@ public void IsDecimal_EmptyInput_ReturnsFalse()
 }
 
 
+[TestMethod]
+public void IranianLandlineValidator_ValidNumberWithLeadingZero_ReturnsTrue()
+{
+    Assert.IsTrue(IranianLandlineValidator.IsValid("02112345678"));
+}
+
+[TestMethod]
+public void IranianLandlineValidator_ValidNumberWithoutLeadingZero_ReturnsTrue()
+{
+    Assert.IsTrue(IranianLandlineValidator.IsValid("2112345678"));
+}
+
+[TestMethod]
+public void IranianLandlineValidator_ValidNumberWithCountryCode_ReturnsTrue()
+{
+    Assert.IsTrue(IranianLandlineValidator.IsValid("+982112345678"));
+}
+
+[TestMethod]
+public void IranianLandlineValidator_ValidNumberWithInternationalPrefix_ReturnsTrue()
+{
+    Assert.IsTrue(IranianLandlineValidator.IsValid("00982112345678"));
+}
+
+[TestMethod]
+public void IranianLandlineValidator_PersianDigits_ReturnsTrue()
+{
+    Assert.IsTrue(IranianLandlineValidator.IsValid("۰۲۱۱۲۳۴۵۶۷۸"));
+}
+
+[TestMethod]
+public void IranianLandlineValidator_ArabicIndicDigits_ReturnsTrue()
+{
+    Assert.IsTrue(IranianLandlineValidator.IsValid("٠٢١١٢٣٤٥٦٧٨"));
+}
+
+[TestMethod]
+public void IranianLandlineValidator_TooShort_ReturnsFalse()
+{
+    Assert.IsFalse(IranianLandlineValidator.IsValid("02112345"));
+}
+
+[TestMethod]
+public void IranianLandlineValidator_ContainsLetters_ReturnsFalse()
+{
+    Assert.IsFalse(IranianLandlineValidator.IsValid("0211234567A"));
+}
+
+[TestMethod]
+public void IranianLandlineValidator_EmptyInput_ReturnsFalse()
+{
+    Assert.IsFalse(IranianLandlineValidator.IsValid(string.Empty));
+}
+
+[TestMethod]
+public void IranianLandlineValidator_NullInput_ReturnsFalse()
+{
+    Assert.IsFalse(IranianLandlineValidator.IsValid(null));
+}
+
 
     }
 }
