@@ -275,21 +275,21 @@ namespace PersianInputValidator.Tests
         public void IranianNationalCodeValidator_AcceptsValidCode()
         {
             Assert.IsTrue(
-                IranianNationalCodeValidator.IsValid("0084575942"));
+                IranianNationalCodeValidator.IsValid("0084575948"));
         }
 
         [TestMethod]
         public void IranianNationalCodeValidator_AcceptsPersianDigits()
         {
             Assert.IsTrue(
-                IranianNationalCodeValidator.IsValid("۰۰۸۴۵۷۵۹۴۲"));
+                IranianNationalCodeValidator.IsValid("۰۰۸۴۵۷۵۹۴۸"));
         }
 
         [TestMethod]
         public void IranianNationalCodeValidator_AcceptsArabicIndicDigits()
         {
             Assert.IsTrue(
-                IranianNationalCodeValidator.IsValid("٠٠٨٤٥٧٥٩٤٢"));
+                IranianNationalCodeValidator.IsValid("٠٠٨٤٥٧٥٩٤٨"));
         }
 
         [TestMethod]
