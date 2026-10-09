@@ -672,6 +672,50 @@ public void Normalize_MixedText_NormalizesArabicLettersOnly()
     Assert.AreEqual("علی کتاب ۱۲۳", PersianCharacterNormalizer.Normalize("علي كتاب ۱۲۳"));
 }
 
+        
+[TestMethod]
+public void ContainsControlCharacters_Null_ReturnsFalse()
+{
+    Assert.IsFalse(InvisibleCharacterDetector.ContainsControlCharacters(null));
+}
+
+[TestMethod]
+public void ContainsControlCharacters_EmptyString_ReturnsFalse()
+{
+    Assert.IsFalse(InvisibleCharacterDetector.ContainsControlCharacters(string.Empty));
+}
+
+[TestMethod]
+public void ContainsControlCharacters_NormalText_ReturnsFalse()
+{
+    Assert.IsFalse(InvisibleCharacterDetector.ContainsControlCharacters("سلام دنیا 123"));
+}
+
+[TestMethod]
+public void ContainsControlCharacters_NewLine_ReturnsTrue()
+{
+    Assert.IsTrue(InvisibleCharacterDetector.ContainsControlCharacters("سلام\nدنیا"));
+}
+
+[TestMethod]
+public void ContainsControlCharacters_Tab_ReturnsTrue()
+{
+    Assert.IsTrue(InvisibleCharacterDetector.ContainsControlCharacters("سلام\tدنیا"));
+}
+
+[TestMethod]
+public void ContainsControlCharacters_ControlCharacterAtStart_ReturnsTrue()
+{
+    Assert.IsTrue(InvisibleCharacterDetector.ContainsControlCharacters("\u0001سلام"));
+}
+
+[TestMethod]
+public void ContainsControlCharacters_ControlCharacterAtEnd_ReturnsTrue()
+{
+    Assert.IsTrue(InvisibleCharacterDetector.ContainsControlCharacters("سلام\u007F"));
+}
+
+
 
     }
 }
