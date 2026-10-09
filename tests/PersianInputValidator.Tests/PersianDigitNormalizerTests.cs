@@ -715,6 +715,115 @@ public void ContainsControlCharacters_ControlCharacterAtEnd_ReturnsTrue()
     Assert.IsTrue(InvisibleCharacterDetector.ContainsControlCharacters("سلام\u007F"));
 }
 
+        
+[TestMethod]
+public void IsInteger_EnglishDigits_ReturnsTrue()
+{
+    Assert.IsTrue(NumericInputValidator.IsInteger("12345"));
+}
+
+[TestMethod]
+public void IsInteger_PersianDigits_ReturnsTrue()
+{
+    Assert.IsTrue(NumericInputValidator.IsInteger("۱۲۳۴۵"));
+}
+
+[TestMethod]
+public void IsInteger_ArabicIndicDigits_ReturnsTrue()
+{
+    Assert.IsTrue(NumericInputValidator.IsInteger("١٢٣٤٥"));
+}
+
+[TestMethod]
+public void IsInteger_NegativeNumber_ReturnsTrue()
+{
+    Assert.IsTrue(NumericInputValidator.IsInteger("-۱۲۳"));
+}
+
+[TestMethod]
+public void IsInteger_SignedNumber_ReturnsTrue()
+{
+    Assert.IsTrue(NumericInputValidator.IsInteger("+123"));
+}
+
+[TestMethod]
+public void IsInteger_DecimalNumber_ReturnsFalse()
+{
+    Assert.IsFalse(NumericInputValidator.IsInteger("12.5"));
+}
+
+[TestMethod]
+public void IsInteger_ContainsLetters_ReturnsFalse()
+{
+    Assert.IsFalse(NumericInputValidator.IsInteger("12a3"));
+}
+
+[TestMethod]
+public void IsInteger_OnlySign_ReturnsFalse()
+{
+    Assert.IsFalse(NumericInputValidator.IsInteger("-"));
+}
+
+[TestMethod]
+public void IsInteger_EmptyInput_ReturnsFalse()
+{
+    Assert.IsFalse(NumericInputValidator.IsInteger(string.Empty));
+}
+
+[TestMethod]
+public void IsDecimal_EnglishDecimal_ReturnsTrue()
+{
+    Assert.IsTrue(NumericInputValidator.IsDecimal("12.50"));
+}
+
+[TestMethod]
+public void IsDecimal_PersianDigits_ReturnsTrue()
+{
+    Assert.IsTrue(NumericInputValidator.IsDecimal("۱۲۳٫۵"));
+}
+
+[TestMethod]
+public void IsDecimal_CommaSeparator_ReturnsTrue()
+{
+    Assert.IsTrue(NumericInputValidator.IsDecimal("12,5"));
+}
+
+[TestMethod]
+public void IsDecimal_NegativeNumber_ReturnsTrue()
+{
+    Assert.IsTrue(NumericInputValidator.IsDecimal("-۱۲٫۵"));
+}
+
+[TestMethod]
+public void IsDecimal_Integer_ReturnsTrue()
+{
+    Assert.IsTrue(NumericInputValidator.IsDecimal("۱۲۳"));
+}
+
+[TestMethod]
+public void IsDecimal_MultipleSeparators_ReturnsFalse()
+{
+    Assert.IsFalse(NumericInputValidator.IsDecimal("12.3,4"));
+}
+
+[TestMethod]
+public void IsDecimal_ContainsLetters_ReturnsFalse()
+{
+    Assert.IsFalse(NumericInputValidator.IsDecimal("12.5abc"));
+}
+
+[TestMethod]
+public void IsDecimal_OnlySeparator_ReturnsFalse()
+{
+    Assert.IsFalse(NumericInputValidator.IsDecimal("."));
+}
+
+[TestMethod]
+public void IsDecimal_EmptyInput_ReturnsFalse()
+{
+    Assert.IsFalse(NumericInputValidator.IsDecimal(string.Empty));
+}
+
 
 
     }
