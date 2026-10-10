@@ -10,7 +10,7 @@
     <Version>0.1.1</Version>
     <Authors>Shahinhmpgit</Authors>
     <Description>A lightweight .NET library for Persian and Arabic-Indic digit normalization, Iranian input validation, and Persian text processing.</Description>
-    <PackageTags>persian;farsi;dotnet;csharp;validation;normalization;unicode;iran</PackageTags>
+    <PackageTags>persian;farsi;persian-validation;persian-digits;iranian-validation;iranian-mobile;iranian-national-code;iranian-postal-code;unicode;normalization;dotnet;csharp;validation;input-validation;text-processing</PackageTags>
 
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
