@@ -49,13 +49,13 @@ Install the package from NuGet:
 ### Package Manager Console
 
 ```powershell
-Install-Package PersianInputValidator -Version 0.1.1
+Install-Package PersianInputValidator -Version 0.1.2
 ```
 
 ### .NET CLI
 
 ```bash
-dotnet add package PersianInputValidator --version 0.1.0
+dotnet add package PersianInputValidator --version 0.1.2
 ```
 
 ### Package Manager UI
