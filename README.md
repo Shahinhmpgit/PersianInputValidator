@@ -1,7 +1,8 @@
-
 # PersianInputValidator
 
 [![Build and Test](https://github.com/Shahinhmpgit/PersianInputValidator/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Shahinhmpgit/PersianInputValidator/actions/workflows/dotnet.yml)
+[![NuGet](https://img.shields.io/nuget/v/PersianInputValidator.svg)](https://www.nuget.org/packages/PersianInputValidator/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/PersianInputValidator.svg)](https://www.nuget.org/packages/PersianInputValidator/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A lightweight C# library for Persian-language applications. It provides digit normalization, text normalization, and input-format validation for common Iranian data.
@@ -36,24 +37,36 @@ A lightweight C# library for Persian-language applications. It provides digit no
 
 ## Requirements
 
-- .NET SDK 8.0 or compatible tooling for building and testing the repository.
 - The library targets .NET Standard 2.0.
 - Tests target .NET 8.0.
+- .NET SDK 8.0 or compatible tooling is required to build and test the repository.
 - Visual Studio or another compatible C# development environment can be used.
 
 ## Installation
 
-The library is currently available as source code in this repository. A published NuGet package is not available yet.
+Install the package from NuGet:
 
-You can clone the repository and reference the library project from your compatible C# application.
+### Package Manager Console
 
-```bash
-git clone https://github.com/Shahinhmpgit/PersianInputValidator.git
+```powershell
+Install-Package PersianInputValidator -Version 0.1.0
 ```
 
-The library project is located at:
+### .NET CLI
 
-`src/PersianInputValidator/PersianInputValidator.csproj`
+```bash
+dotnet add package PersianInputValidator --version 0.1.0
+```
+
+### Package Manager UI
+
+1. Open your project in Visual Studio.
+2. Right-click the project in Solution Explorer.
+3. Select **Manage NuGet Packages**.
+4. Search for `PersianInputValidator`.
+5. Select version `0.1.0` and install it.
+
+NuGet package: https://www.nuget.org/packages/PersianInputValidator/
 
 ## Usage
 
@@ -72,6 +85,8 @@ string persian = PersianDigitNormalizer.ToPersianDigits("Order 123");
 ### Normalize Persian characters and whitespace
 
 ```csharp
+using PersianInputValidator;
+
 string text = PersianCharacterNormalizer.Normalize("علي كتاب");
 // Result: "علی کتاب"
 
@@ -82,11 +97,13 @@ string clean = PersianTextNormalizer.NormalizeWhitespace("  سلام    دنیا
 ### Validate numeric input
 
 ```csharp
+using PersianInputValidator;
+
 bool integerIsValid = NumericInputValidator.IsInteger("-۱۲۳");
-// Result: true
+// Expected: true
 
 bool decimalIsValid = NumericInputValidator.IsDecimal("۱۲۳٫۵");
-// Result: true
+// Expected: true
 ```
 
 The decimal validator supports a dot, comma, or Arabic decimal separator. Thousands separators are not supported.
@@ -94,7 +111,10 @@ The decimal validator supports a dot, comma, or Arabic decimal separator. Thousa
 ### Validate Iranian mobile numbers
 
 ```csharp
-bool mobileIsValid = IranianMobileValidator.IsValid("09123456789");
+using PersianInputValidator;
+
+bool mobileIsValid =
+    IranianMobileValidator.IsValid("09123456789");
 ```
 
 This checks the supported number format; it does not verify whether the number is assigned or active.
@@ -102,15 +122,19 @@ This checks the supported number format; it does not verify whether the number i
 ### Validate Iranian national identification codes
 
 ```csharp
+using PersianInputValidator;
+
 bool nationalCodeIsValid =
     IranianNationalCodeValidator.IsValid("0084575948");
 ```
 
-This checks the code's format and checksum. It does not verify the identity of a person or confirm registration in an official database.
+This checks the code's format and checksum. It does not verify a person's identity or confirm registration in an official database.
 
 ### Validate Iranian postal codes
 
 ```csharp
+using PersianInputValidator;
+
 bool postalCodeIsValid =
     IranianPostalCodeValidator.IsValid("1234567890");
 ```
@@ -120,6 +144,8 @@ This checks the basic ten-digit format only. It does not confirm that the postal
 ### Validate landline numbers
 
 ```csharp
+using PersianInputValidator;
+
 bool landlineIsValid =
     IranianLandlineValidator.IsValid("02112345678");
 ```
@@ -129,7 +155,10 @@ This checks a common number format and does not verify whether the line is assig
 ### Validate email syntax
 
 ```csharp
-bool emailIsValid = EmailValidator.IsValid("user@example.com");
+using PersianInputValidator;
+
+bool emailIsValid =
+    EmailValidator.IsValid("user@example.com");
 ```
 
 Syntax validation does not guarantee that an address exists or can receive email.
@@ -148,6 +177,12 @@ Build the library in Release configuration:
 
 ```bash
 dotnet build src/PersianInputValidator/PersianInputValidator.csproj --configuration Release
+```
+
+Create a NuGet package:
+
+```bash
+dotnet pack src/PersianInputValidator/PersianInputValidator.csproj --configuration Release
 ```
 
 Every proposed behavior change should include appropriate automated tests.
@@ -171,9 +206,16 @@ This project is under active development. Features should be considered supporte
 Bug reports, suggestions, and pull requests are welcome.
 
 Please include:
+
 - A clear description of the problem or proposed improvement.
 - Reproducible examples when applicable.
 - Automated tests for changes in behavior.
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a pull request.
+
+## Security
+
+If you discover a potential security vulnerability, please follow the instructions in [SECURITY.md](SECURITY.md).
 
 ## License
 
