@@ -1,0 +1,47 @@
+
+name: Publish NuGet Package
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Build, Test and Publish
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore tests/PersianInputValidator.Tests/PersianInputValidator.Tests.csproj
+
+      - name: Build library
+        run: dotnet build src/PersianInputValidator/PersianInputValidator.csproj --configuration Release --no-restore
+
+      - name: Run unit tests
+        run: dotnet test tests/PersianInputValidator.Tests/PersianInputValidator.Tests.csproj --configuration Release --no-restore
+
+      - name: Pack NuGet package
+        run: dotnet pack src/PersianInputValidator/PersianInputValidator.csproj --configuration Release --no-restore --output ./artifacts
+
+      - name: Authenticate with NuGet Trusted Publishing
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: shahinhmp
+
+      - name: Publish package to NuGet
+        run: dotnet nuget push "./artifacts/*.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json
