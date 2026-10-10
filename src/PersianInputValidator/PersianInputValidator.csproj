@@ -7,7 +7,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
     <PackageId>PersianInputValidator</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Shahinhmpgit</Authors>
     <Description>A lightweight .NET library for Persian and Arabic-Indic digit normalization, Iranian input validation, and Persian text processing.</Description>
     <PackageTags>persian;farsi;dotnet;csharp;validation;normalization;unicode;iran</PackageTags>
